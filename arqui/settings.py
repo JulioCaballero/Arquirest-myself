@@ -133,22 +133,22 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-print (socket.gethostname)
-
-# try:
-#     if ((platform == "linux" or platform == "linux2") and socket.gethostname != "heroku"):
-#         from arqui.rasp_settings import *
-#     else:
-#         from arqui.local_settings import *
-# except ImportError:
-#     pass
+print (socket.gethostname())
 
 try:
-    from arqui.local_settings import *
-except ImportError:
-    from arqui.rasp_settings import *
+    if ((platform == "linux" or platform == "linux2") and socket.gethostname() != "heroku"):
+        from arqui.rasp_settings import *
+    else:
+        from arqui.local_settings import *
 except ImportError:
     pass
+
+# try:
+#     from arqui.local_settings import *
+# except ImportError:
+#     from arqui.rasp_settings import *
+# except ImportError:
+#     pass
 
 if not DEBUG:
     SECRET_KEY = 'SECRET_KEY'
