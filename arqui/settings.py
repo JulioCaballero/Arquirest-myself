@@ -133,7 +133,8 @@ STATIC_URL = '/static/'
 
 try:
     if platform == "linux" or platform == "linux2":
-        from arqui.rasp_settings import *
+        # from arqui.rasp_settings import *
+        pass
     else:
         from arqui.local_settings import *
 except ImportError:
