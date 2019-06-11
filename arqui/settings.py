@@ -11,6 +11,8 @@ import os
 from decouple import config
 import dj_database_url
 from sys import platform
+import socket
+
 # Importaciones necesarios de heroku fin
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -131,6 +133,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+ print(platform)
 try:
     if ((platform == "linux" or platform == "linux2") and DEBUG != False):
         from arqui.rasp_settings import *
