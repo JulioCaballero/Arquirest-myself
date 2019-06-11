@@ -136,7 +136,7 @@ STATIC_URL = '/static/'
 print (socket.gethostname())
 
 try:
-    if ((platform == "linux" or platform == "linux2") and DEBUG != False):
+    if ((platform == "linux" or platform == "linux2") and socket.gethostname() != "96ab9578-0a26-4f2d-bee6-7981476d451d"):
         from arqui.rasp_settings import *
     else:
         from arqui.local_settings import *
