@@ -133,22 +133,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-print (socket.gethostname())
-
 try:
-    if ((platform == "linux" or platform == "linux2") and socket.gethostname() != "96ab9578-0a26-4f2d-bee6-7981476d451d"):
-        from arqui.rasp_settings import *
-    else:
-        from arqui.local_settings import *
+    from arqui.local_settings import *
 except ImportError:
     pass
-
-# try:
-#     from arqui.local_settings import *
-# except ImportError:
-#     from arqui.rasp_settings import *
-# except ImportError:
-#     pass
 
 if not DEBUG:
     SECRET_KEY = 'SECRET_KEY'
