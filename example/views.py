@@ -16,6 +16,15 @@ class ExampleList(APIView):
         queryset = Example.objects.filter(delete = False)
         serializer = ExampleSerializers(queryset)
         return Response(serializer.data)
+        
+    def post(self, request, format=None):
+        serializer = ExampleSerializers(data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            datas = serializer.data
+            return Response(datas)
+        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+
 
 
 # Create your views here.

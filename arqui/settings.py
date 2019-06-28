@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # Agregando aplicaciones independientes de Django
     'Login',
     'example',
+    'Alumno',
     'rest_framework',
     'rest_framework.authtoken',
 ]
@@ -135,6 +136,7 @@ STATIC_URL = '/static/'
 
 try:
     from arqui.local_settings import *
+
 except ImportError:
     pass
 
