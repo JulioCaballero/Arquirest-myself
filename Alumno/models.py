@@ -1,8 +1,7 @@
 from django.db import models
 from django.conf import settings
 
-class Alumno(models.Model):
-    token = models.IntegerField(null=False)
+class Alumno(models.Model):    
     name = models.CharField(max_length=254, null=False)
     lastName = models.CharField(max_length=254, null=False)
     matricula = models.CharField(max_length=254, null=False)
