@@ -36,11 +36,11 @@ class AlumnoDetail(APIView):
     permission_classes = (IsAuthenticated,)
     def get_object(self, id):
         try:
-            return Alumno.objects.get(pk=id, delete = False)
+            return Alumno.objects.get(pk=id)
         except Alumno.DoesNotExist:
             return 404
 
-    def get(self, id, request, format=None):
+    def get(self, request, id, format=None):
         alumno = self.get_object(id)
         if alumno != 404:
             #many = True No aplica si retorno un solo objeto
