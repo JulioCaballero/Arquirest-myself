@@ -34,14 +34,14 @@ class AlumnoDetail(APIView):
     #Metodo get para solicitar info de un solo parametro
     authentication_classes = (SessionAuthentication, BasicAuthentication)
     permission_classes = (IsAuthenticated,)
-    def get_object(self, id):
+    def get_object(self, token):
         try:
-            return Alumno.objects.get(pk=id)
+            return Alumno.objects.get(pk=token)
         except Alumno.DoesNotExist:
             return 404
 
-    def get(self, request, id, format=None):
-        alumno = self.get_object(id)
+    def get(self, request, token, format=None):
+        alumno = self.get_object(token)
         if alumno != 404:
             #many = True No aplica si retorno un solo objeto
             serializer = AlumnoSerializers(alumno)
