@@ -14,8 +14,8 @@ from Alumno.serializer import AlumnoSerializers
 
 class AlumnoList(APIView):
     # METODO GET PARA SOLICITAR INFO
-    authentication_classes = (SessionAuthentication, BasicAuthentication)
-    permission_classes = (IsAuthenticated,)
+    # authentication_classes = (SessionAuthentication, BasicAuthentication)
+    # permission_classes = (IsAuthenticated,)
 
     def get(self, request, format=None):
         queryset = Alumno.objects.all()
@@ -32,8 +32,8 @@ class AlumnoList(APIView):
 
 class AlumnoDetail(APIView):
     #Metodo get para solicitar info de un solo parametro
-    authentication_classes = (SessionAuthentication, BasicAuthentication)
-    permission_classes = (IsAuthenticated,)
+    # authentication_classes = (SessionAuthentication, BasicAuthentication)
+    # permission_classes = (IsAuthenticated,)
     def get_object(self, token):
         try:
             return Alumno.objects.get(token=token)
