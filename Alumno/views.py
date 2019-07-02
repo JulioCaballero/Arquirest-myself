@@ -36,7 +36,7 @@ class AlumnoDetail(APIView):
     permission_classes = (IsAuthenticated,)
     def get_object(self, token):
         try:
-            return Alumno.objects.get(pk=token)
+            return Alumno.objects.get(token=token)
         except Alumno.DoesNotExist:
             return 404
 
