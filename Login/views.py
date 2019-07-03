@@ -9,14 +9,15 @@ class CustonAuthToken(ObtainAuthToken):
                                             context = {
                                                     'request': request, 
                                                     }
-                                            )
-        serializer.is_valid(raise_exception = True)
-        user = serializer.validated_data['user']
-        token, created = Token.objects.get_or_create(user=user)
+                                            )        
+        print (serializer.is_valid())
+        if serializer.is_valid():
+            user = serializer.validated_data['user']
+            token, created = Token.objects.get_or_create(user=user)
 
-        return Response({
-            'token': token.key,
-            'user_id': user.pk,
-            'username': user.username
-        })
-        
+            return Response({
+                'token': token.key,
+                'user_id': user.pk,
+                'username': user.username
+            })
+        return Response(404)
