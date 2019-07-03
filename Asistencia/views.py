@@ -15,10 +15,6 @@ from Asistencia.serializer import AsistenciaSerializers
 from Alumno.models import Alumno
 
 class AsistenciaDetail(APIView):
-     def get(self, request, format=None):
-        queryset = Asistencia.objects.all()
-        serializer = AsistenciaSerializers(queryset, many=True)
-        return Response(serializer.data)
     
     def get_object(self, fecha):
         try:
@@ -34,7 +30,7 @@ class AsistenciaDetail(APIView):
         else:
             return Response(asistencia, status = status.HTTP_400_BAD_REQUEST)
 
-class AsistenciaList(APIview):
+class AsistenciaList(APIView):
     def post(self, request, format=None):
         serializer = AsistenciaSerializers(data = request.data)
         if serializer.is_valid():
@@ -43,5 +39,9 @@ class AsistenciaList(APIview):
             return Response(datas)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
+    def get(self, request, format=None):
+        queryset = Asistencia.objects.all()
+        serializer = AsistenciaSerializers(queryset, many=True)
+        return Response(serializer.data)
 
 # Create your views here.

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # Agregando aplicaciones independientes de Django
     'Login',
     'example',
+    'Asistencia',
     'Alumno',
     'rest_framework',
     'rest_framework.authtoken',

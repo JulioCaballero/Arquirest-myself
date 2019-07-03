@@ -14,6 +14,10 @@ from Alumno.serializer import AlumnoSerializers
 from Asistencia.models import Asistencia
 from Asistencia.serializer import AsistenciaSerializers
 
+
+from datetime import datetime, timedelta, date
+import time
+
 class AlumnoList(APIView):
     # METODO GET PARA SOLICITAR INFO
     # authentication_classes = (SessionAuthentication, BasicAuthentication)
@@ -23,14 +27,32 @@ class AlumnoList(APIView):
         queryset = Alumno.objects.all()
         serializer = AlumnoSerializers(queryset, many=True)
         return Response(serializer.data)
+
+    def get_object(self, id):
+        try:
+            return Alumno.objects.get(pk=id)
+        except Alumno.DoesNotExist:
+            return 404
         
     def post(self, request, format=None):
         serializer = AlumnoSerializers(data = request.data)
         if serializer.is_valid():
-            serializer.save()
+            alumno = serializer.save()
             datas = serializer.data
-            AsistenciaSerializers(datas=request.data.id)
-            return Response(datas)
+            id_alumno = alumno.id
+            x = datetime.now()
+      
+              
+            a = str(x.year)
+            m = str(x.month)
+            d = str(x.day)
+            fechaCompara = a + "-" + m + "-" + d
+
+            asistencia=AsistenciaSerializers(data = {"id_alumno":id_alumno, "fecha":fechaCompara})
+            if asistencia.is_valid():
+                asistencia.save()
+                datos = {"name":serializer.data['name'],"matricula":serializer.data['matricula'],"token":serializer.data['token'],"asistencia:":asistencia.data['fecha']}
+            return Response(datos)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
 class AlumnoDetail(APIView):
@@ -48,7 +70,18 @@ class AlumnoDetail(APIView):
         if alumno != 404:
             #many = True No aplica si retorno un solo objeto
             serializer = AlumnoSerializers(alumno)
-            return Response(serializer.data)
+            alum = serializer.data['id']
+            x = datetime.now()
+            a = str(x.year)
+            m = str(x.month)
+            d = str(x.day)
+            fechaCompara = a + "-" + m + "-" + d
+            
+            asistencia=AsistenciaSerializers(data = {"id_alumno":alum, "fecha":fechaCompara})
+            if asistencia.is_valid():
+                asistencia.save()
+                datos = {"name":serializer.data['name'],"matricula":serializer.data['matricula'],"token":serializer.data['token'],"asistencia:":asistencia.data['fecha']}
+            return Response(datos)
         else:
             return Response(alumno, status = status.HTTP_400_BAD_REQUEST)
 
