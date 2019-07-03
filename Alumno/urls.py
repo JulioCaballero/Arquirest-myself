@@ -6,5 +6,5 @@ from Alumno import views
 
 urlpatterns = [
     re_path(r'alumno_lista/$', views.AlumnoList.as_view()),
-    re_path(r'alumno_detail/(?P<token>\d+)$', views.AlumnoDetail.as_view()),
+    re_path(r'alumno_detail/(?P<token>[\w\-]+)$', views.AlumnoDetail.as_view()),
 ]
