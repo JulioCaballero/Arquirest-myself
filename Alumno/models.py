@@ -15,12 +15,4 @@ class Alumno(models.Model):
     class Meta:
         db_table = 'Alumno'
 
-# class Rfid(models.Model):
-#     token = models.IntegerField(null=False)
-#     id_alumno = models.ForeignKey(Alumnos, on_delete=models.CASCADE)
 
-#     def __str__(self):
-#         return self.name
-
-#     class Meta:
-#         db_table = 'Rfid'

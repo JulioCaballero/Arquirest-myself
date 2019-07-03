@@ -11,6 +11,8 @@ from rest_framework.permissions import IsAuthenticated
 
 from Alumno.models import Alumno
 from Alumno.serializer import AlumnoSerializers
+from Asistencia.models import Asistencia
+from Asistencia.serializer import AsistenciaSerializers
 
 class AlumnoList(APIView):
     # METODO GET PARA SOLICITAR INFO
@@ -27,6 +29,7 @@ class AlumnoList(APIView):
         if serializer.is_valid():
             serializer.save()
             datas = serializer.data
+            AsistenciaSerializers(datas=request.data.id)
             return Response(datas)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
