@@ -47,7 +47,7 @@ class AlumnoDetail(APIView):
             serializer = AlumnoSerializers(alumno)
             return Response(serializer.data)
         else:
-            return Response(alumno)
+            return Response(alumno, status = status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, id, format=None):
         alumno = self.get_object(id)
