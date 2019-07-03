@@ -49,8 +49,8 @@ class AlumnoDetail(APIView):
         else:
             return Response(alumno, status = status.HTTP_400_BAD_REQUEST)
 
-    def put(self, request, id, format=None):
-        alumno = self.get_object(id)
+    def put(self, request, token, format=None):
+        alumno = self.get_object(token)
         if alumno != 404:
             serializer = AlumnoSerializers(alumno, data=request.data)
             if serializer.is_valid():
@@ -62,5 +62,10 @@ class AlumnoDetail(APIView):
         else: 
             return Response(alumno, status = status.HTTP_404_BAD_REQUEST)
 
-
+    def delete(self, request, token, format=None):
+        alumno = self.get_object(token)
+        if alumno != 404:
+            alumno.delete()
+            return Response(1)
+        return Response(404)
 # Create your views here.

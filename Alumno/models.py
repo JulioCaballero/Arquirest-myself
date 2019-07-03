@@ -6,7 +6,7 @@ class Alumno(models.Model):
     lastName = models.CharField(max_length=254, null=False)
     matricula = models.CharField(max_length=254, null=False)
     career = models.CharField(max_length=254, null=False)
-    token = models.IntegerField(null=True)
+    token = models.CharField(max_length=254, null=True)
 
 
     def __str__(self):
