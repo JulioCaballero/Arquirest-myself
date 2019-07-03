@@ -14,7 +14,7 @@ class ExampleList(APIView):
     # METODO GET PARA SOLICITAR INFO
     def get(self, request, format=None):
         queryset = Example.objects.filter(delete = False)
-        serializer = ExampleSerializers(queryset)
+        serializer = ExampleSerializers(queryset, many=True)
         return Response(serializer.data)
         
     def post(self, request, format=None):
