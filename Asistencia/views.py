@@ -15,6 +15,11 @@ from Asistencia.serializer import AsistenciaSerializers
 from Alumno.models import Alumno
 
 class AsistenciaDetail(APIView):
+     def get(self, request, format=None):
+        queryset = Asistencia.objects.all()
+        serializer = AsistenciaSerializers(queryset, many=True)
+        return Response(serializer.data)
+    
     def get_object(self, fecha):
         try:
             return Asistencia.objects.get(fecha=fecha)
